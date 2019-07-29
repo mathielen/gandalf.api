@@ -16,6 +16,12 @@ class ConditionsTypes
     public function __construct()
     {
         $this->conditions = [
+            '$contains' => [
+                'input_type' => '',
+                'function' => function ($condition_value, $field_value) {
+                    return count(array_diff($this->explodeValue($condition_value), $this->explodeValue($field_value))) === 0;
+                }
+            ],
             '$is_set' => [
                 'input_type' => '',
                 'function' => function () {
